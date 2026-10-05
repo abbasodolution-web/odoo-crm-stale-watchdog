@@ -1,27 +1,26 @@
 {
     'name': 'Stale Opportunity Watchdog',
-    'version': '17.0.1.0.1',
+    'version': '18.0.2.0.0',
     'category': 'Sales/CRM',
-    'summary': 'Auto-reminds salespeople about opportunities that have gone quiet',
+    'summary': 'Find CRM opportunities that went quiet: reminders, per-stage limits, '
+               'pause, escalation and a revenue-at-risk report',
     'description': """
 Stale Opportunity Watchdog
-===========================
-Configure an inactivity threshold (in days). A daily scheduled action scans
-open CRM opportunities that haven't been updated within that window and
-automatically schedules a follow-up reminder activity for the assigned
-salesperson - so nothing quietly falls through the cracks in your pipeline.
+==========================
+Every day the Watchdog checks open opportunities for real activity: a note, an
+email, a completed activity or a stage change. When there has been none for
+longer than the limit, it flags the opportunity, shows a "Stale" badge in the
+pipeline and gives the salesperson a follow-up reminder.
 
-Also adds a "Stale" indicator to opportunities, filterable and groupable
-right from the Pipeline search bar.
-
-Features
---------
-* Configurable inactivity threshold (Settings > CRM)
-* Daily cron flags stale opportunities and creates a follow-up activity
-  for the assigned salesperson
-* Duplicate-safe: never creates a second pending reminder while one is
-  already open on the same opportunity
-* "Stale Opportunities" filter and "Stale" group-by in the Pipeline view
+* Real activity, not "last modified": automatic updates don't hide a quiet deal
+* A different limit per stage (e.g. 7 days in Proposition, 30 in New)
+* Clears itself the moment someone logs a note, sends an email or moves the stage
+* Pause the reminders on an opportunity until a date, with a reason in the chatter
+* Escalates to the sales team leader when the reminder stays overdue
+* No salesperson? The team leader gets the reminder
+* Ignore opportunities with chosen tags
+* "Stale Opportunities" report: revenue at risk per salesperson and stage
+* Settings per company
 """,
     'author': 'ABBAS',
     'maintainer': 'ABBAS',
@@ -33,10 +32,11 @@ Features
         'data/mail_activity_type_data.xml',
         'data/ir_cron_data.xml',
         'views/crm_lead_views.xml',
+        'views/crm_stage_views.xml',
         'views/res_config_settings_views.xml',
+        'views/crm_stale_snooze_wizard_views.xml',
     ],
+    'images': ['static/description/banner.png'],
     'installable': True,
     'application': False,
-    'auto_install': False,
-    'images': ['static/description/banner.png'],
 }

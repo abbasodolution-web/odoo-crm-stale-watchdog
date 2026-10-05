@@ -1,18 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="view_crm_case_opportunities_filter_inherit_stale_watchdog" model="ir.ui.view">
+    <!-- Search: filters and group-by -->
+    <record id="crm_lead_search_stale_watchdog" model="ir.ui.view">
         <field name="name">crm.lead.search.stale.watchdog</field>
         <field name="model">crm.lead</field>
         <field name="inherit_id" ref="crm.view_crm_case_opportunities_filter"/>
         <field name="arch" type="xml">
             <filter name="open_opportunities" position="after">
-                <filter string="Stale Opportunities" name="filter_stale_opportunities"
-                        domain="[('is_stale', '=', True)]"
-                        help="Opportunities that haven't been updated within the configured threshold"/>
+                <filter string="Stale" name="filter_stale" domain="[('is_stale', '=', True)]"
+                        help="No real activity for longer than the stale threshold"/>
+                <filter string="Stale Reminders Paused" name="filter_stale_snoozed"
+                        domain="[('stale_snoozed_until', '>', context_today().strftime('%Y-%m-%d'))]"/>
             </filter>
             <filter name="lostreason" position="after">
                 <filter string="Stale" name="groupby_is_stale" context="{'group_by': 'is_stale'}"/>
             </filter>
         </field>
     </record>
+
+    <!-- Pipeline card: "Stale · 12d" badge -->
+    <record id="crm_lead_kanban_stale_watchdog" model="ir.ui.view">
+        <field name="name">crm.lead.kanban.stale.watchdog</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_kanban_view_leads"/>
+        <field name="arch" type="xml">
+            <field name="tag_ids" position="after">
+                <field name="is_stale" invisible="1"/>
+                <field name="stale_days" invisible="1"/>
+                <div t-if="record.is_stale.raw_value" class="mt-1">
+                    <span class="badge rounded-pill text-bg-warning" title="No real activity for this many days">
+                        <i class="fa fa-hourglass-end me-1"/>Stale · <t t-esc="record.stale_days.raw_value"/>d
+                    </span>
+                </div>
+            </field>
+        </field>
+    </record>
+
+    <!-- List: days inactive column -->
+    <record id="crm_lead_list_stale_watchdog" model="ir.ui.view">
+        <field name="name">crm.lead.list.stale.watchdog</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
+        <field name="arch" type="xml">
+            <field name="stage_id" position="after">
+                <field name="is_stale" column_invisible="True"/>
+                <field name="stale_days" optional="show" string="Days Inactive"
+                       decoration-warning="is_stale" decoration-bf="is_stale" invisible="not is_stale"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- Form: banner, snooze button, details -->
+    <record id="crm_lead_form_stale_watchdog" model="ir.ui.view">
+        <field name="name">crm.lead.form.stale.watchdog</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_title')]" position="before">
+                <field name="is_stale" invisible="1"/>
+                <div class="alert alert-warning d-flex align-items-center gap-2 mb-2" role="alert" invisible="not is_stale">
+                    <i class="fa fa-hourglass-end"/>
+                    <span>No real activity for <b><field name="stale_days" class="d-inline"/> days</b>. Log a note, send an email or complete an activity, or pause the reminders if it is waiting on purpose.</span>
+                    <button name="action_open_stale_snooze" type="object" string="Pause" class="btn btn-sm btn-secondary ms-auto"/>
+                </div>
+                <div class="alert alert-info d-flex align-items-center gap-2 mb-2" role="status" invisible="not stale_snoozed_until">
+                    <i class="fa fa-bell-slash"/>
+                    <span>Stale reminders paused until <field name="stale_snoozed_until" class="d-inline" readonly="1"/>.</span>
+                    <button name="action_stale_unsnooze" type="object" string="Resume" class="btn btn-sm btn-link ms-auto"/>
+                </div>
+            </xpath>
+            <page name="lead" position="inside">
+                <group string="Stale Opportunity Watchdog" name="stale_watchdog">
+                    <field name="stale_last_touch_date"/>
+                    <field name="stale_days" invisible="not is_stale"/>
+                </group>
+            </page>
+        </field>
+    </record>
+
+    <!-- Snooze from the list (Action menu) -->
+    <record id="crm_stale_snooze_wizard_action" model="ir.actions.act_window">
+        <field name="name">Pause Stale Reminders</field>
+        <field name="res_model">crm.stale.snooze.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="crm.model_crm_lead"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="context">{'default_lead_ids': active_ids}</field>
+    </record>
+
+    <!-- Report: revenue at risk -->
+    <record id="crm_lead_stale_graph" model="ir.ui.view">
+        <field name="name">crm.lead.stale.graph</field>
+        <field name="model">crm.lead</field>
+        <field name="arch" type="xml">
+            <graph string="Stale Opportunities" type="bar" stacked="1" sample="1">
+                <field name="user_id"/>
+                <field name="stage_id"/>
+                <field name="expected_revenue" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="crm_lead_stale_pivot" model="ir.ui.view">
+        <field name="name">crm.lead.stale.pivot</field>
+        <field name="model">crm.lead</field>
+        <field name="arch" type="xml">
+            <pivot string="Stale Opportunities" sample="1">
+                <field name="user_id" type="row"/>
+                <field name="stage_id" type="col"/>
+                <field name="expected_revenue" type="measure"/>
+                <field name="stale_days" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="crm_lead_stale_report_action" model="ir.actions.act_window">
+        <field name="name">Stale Opportunities</field>
+        <field name="res_model">crm.lead</field>
+        <field name="view_mode">pivot,graph,list,kanban,form</field>
+        <field name="domain">[('type', '=', 'opportunity')]</field>
+        <field name="context">{'search_default_filter_stale': 1}</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'pivot', 'view_id': ref('crm_lead_stale_pivot')}),
+            (0, 0, {'view_mode': 'graph', 'view_id': ref('crm_lead_stale_graph')}),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('crm.crm_case_tree_view_oppor')}),
+            (0, 0, {'view_mode': 'kanban', 'view_id': ref('crm.crm_case_kanban_view_leads')})]"/>
+        <field name="search_view_id" ref="crm.view_crm_case_opportunities_filter"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No stale opportunities</p>
+            <p>Every open opportunity has had real activity recently.</p>
+        </field>
+    </record>
+
+    <menuitem id="crm_menu_report_stale" name="Stale Opportunities" parent="crm.crm_menu_report"
+              action="crm_lead_stale_report_action" sequence="25"/>
 </odoo>

@@ -1,78 +1,65 @@
 <section class="oe_container">
     <div class="oe_row oe_spaced">
-        <div class="oe_span12">
-            <h2 class="oe_slogan" style="color:#4f46e5;">Stale Opportunity Watchdog</h2>
-            <h3 class="oe_slogan">Never let a deal go quiet. Automatic follow-up reminders for idle CRM opportunities.</h3>
-            <p class="oe_mt32" style="text-align:center;font-size:16px;">
-                Opportunities rarely get lost on purpose &mdash; they get forgotten. This module watches your
-                pipeline every day, flags open opportunities that haven't been updated for a number of days you
-                choose, and gives the assigned salesperson a follow-up to-do.
-            </p>
-        </div>
-    </div>
-</section>
-
-<section class="oe_container oe_dark">
-    <div class="oe_row oe_spaced">
-        <div class="oe_span12">
-            <h2 class="oe_slogan">Key features</h2>
-            <ul style="font-size:16px;line-height:1.8;max-width:780px;margin:0 auto;">
-                <li><b>Configurable threshold</b> &mdash; Settings &rsaquo; CRM, default 30 days</li>
-                <li><b>Daily check</b> &mdash; a scheduled action flags idle opportunities automatically</li>
-                <li><b>Follow-up reminder</b> &mdash; a &ldquo;Stale Opportunity Follow-up&rdquo; activity for the salesperson</li>
-                <li><b>No duplicates</b> &mdash; never adds a second reminder while one is still open</li>
-                <li><b>Self-cleaning</b> &mdash; the flag clears as soon as the deal is updated, won or lost</li>
-                <li><b>Pipeline filter</b> &mdash; &ldquo;Stale Opportunities&rdquo; filter and &ldquo;Stale&rdquo; group-by</li>
-                <li><b>Lightweight</b> &mdash; depends only on CRM and Discuss, covered by automated tests</li>
-            </ul>
-        </div>
+        <h2 class="oe_slogan" style="color:#4f46e5">Stale Opportunity Watchdog</h2>
+        <h3 class="oe_slogan">Find the deals that went quiet, before they are lost</h3>
+        <p class="oe_mt32" style="font-size:16px">
+            Every day the Watchdog checks your open opportunities for <b>real activity</b>: a note, an email,
+            a completed activity or a stage change. When a deal has had none for too long, it is flagged in the
+            pipeline and its salesperson gets a follow-up reminder. If nobody acts, the team leader hears about it.
+        </p>
     </div>
 </section>
 
 <section class="oe_container">
     <div class="oe_row oe_spaced">
-        <div class="oe_span12">
-            <h2 class="oe_slogan">1. Set your threshold</h2>
-            <p style="text-align:center;font-size:16px;">Settings &rsaquo; CRM &rsaquo; Stale Opportunity Watchdog</p>
-            <div class="oe_demo oe_screenshot">
-                <img src="screenshot_settings.png" alt="Threshold setting" style="max-width:100%;">
-            </div>
+        <h3 class="oe_slogan">How it looks</h3>
+        <div style="margin:24px auto;max-width:1000px;text-align:center">
+            <p style="font-size:15px;margin-bottom:8px"><b>A "Stale · days" badge on every quiet deal in the pipeline</b></p>
+            <img src="screenshot_pipeline.png" style="max-width:100%;border:1px solid #ddd;border-radius:6px;box-shadow:0 4px 16px rgba(0,0,0,.12)"/>
+        </div>
+        <div style="margin:24px auto;max-width:1000px;text-align:center">
+            <p style="font-size:15px;margin-bottom:8px"><b>The form says how long the deal has been quiet, with a Pause button</b></p>
+            <img src="screenshot_form.png" style="max-width:100%;border:1px solid #ddd;border-radius:6px;box-shadow:0 4px 16px rgba(0,0,0,.12)"/>
+        </div>
+        <div style="margin:24px auto;max-width:1000px;text-align:center">
+            <p style="font-size:15px;margin-bottom:8px"><b>Pause the reminders until a date, with the reason in the chatter</b></p>
+            <img src="screenshot_pause.png" style="max-width:100%;border:1px solid #ddd;border-radius:6px;box-shadow:0 4px 16px rgba(0,0,0,.12)"/>
+        </div>
+        <div style="margin:24px auto;max-width:1000px;text-align:center">
+            <p style="font-size:15px;margin-bottom:8px"><b>Revenue at risk per salesperson and stage</b></p>
+            <img src="screenshot_report.png" style="max-width:100%;border:1px solid #ddd;border-radius:6px;box-shadow:0 4px 16px rgba(0,0,0,.12)"/>
+        </div>
+        <div style="margin:24px auto;max-width:1000px;text-align:center">
+            <p style="font-size:15px;margin-bottom:8px"><b>Settings per company: stale after, escalation, tags to ignore</b></p>
+            <img src="screenshot_settings.png" style="max-width:100%;border:1px solid #ddd;border-radius:6px;box-shadow:0 4px 16px rgba(0,0,0,.12)"/>
         </div>
     </div>
 </section>
 
 <section class="oe_container oe_dark">
     <div class="oe_row oe_spaced">
-        <div class="oe_span12">
-            <h2 class="oe_slogan">2. See every stale opportunity</h2>
-            <p style="text-align:center;font-size:16px;">CRM &rsaquo; Pipeline &rsaquo; Filters &rsaquo; Stale Opportunities</p>
-            <div class="oe_demo oe_screenshot">
-                <img src="screenshot_stale_filter.png" alt="Stale Opportunities filter" style="max-width:100%;">
-            </div>
-        </div>
+        <h3 class="oe_slogan">What it does</h3>
+        <ul style="font-size:15px;line-height:1.8">
+            <li><b>Real activity, not "last modified"</b>: automatic updates never hide a quiet deal.</li>
+            <li><b>A limit per stage</b>: e.g. 7 days in Proposition, 30 days in New, with a company default.</li>
+            <li><b>"Stale · 12d" badge</b> on pipeline cards, a Days Inactive column and a banner on the form.</li>
+            <li><b>Clears itself</b> the moment someone logs a note, sends an email, completes an activity or moves the stage.</li>
+            <li><b>Pause reminders</b> on a deal that is waiting on purpose, until a date, with the reason in the chatter.</li>
+            <li><b>Escalation</b>: when the reminder stays overdue, the sales team leader gets an activity too.</li>
+            <li><b>No salesperson?</b> The team leader gets the reminder instead.</li>
+            <li><b>Ignore tags</b>: leave long-cycle deals out.</li>
+            <li><b>Stale Opportunities report</b>: revenue at risk per salesperson and stage (graph, pivot, list).</li>
+            <li>Settings per company. Covered by 15 automated tests.</li>
+        </ul>
     </div>
 </section>
 
 <section class="oe_container">
     <div class="oe_row oe_spaced">
-        <div class="oe_span12">
-            <h2 class="oe_slogan">3. Salespeople get a follow-up reminder</h2>
-            <p style="text-align:center;font-size:16px;">Shown on the opportunity and in the salesperson's activities</p>
-            <div class="oe_demo oe_screenshot">
-                <img src="screenshot_reminder.png" alt="Follow-up activity" style="max-width:100%;">
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="oe_container oe_dark">
-    <div class="oe_row oe_spaced">
-        <div class="oe_span12" style="text-align:center;">
-            <h2 class="oe_slogan">Need a custom Odoo flow?</h2>
-            <p style="font-size:16px;">
-                I'm ABBAS. I build Odoo modules tailored to how your business works &mdash;
-                CRM automations, custom reports, approvals and integrations for Odoo 17 &amp; 19.
-            </p>
-        </div>
+        <h3 class="oe_slogan">Setup</h3>
+        <p style="font-size:15px">CRM &rsaquo; Configuration &rsaquo; Settings &rsaquo; <b>Stale Opportunity Watchdog</b>: days before an
+            opportunity is stale, days before escalation, tags to ignore. To give a stage its own limit, open the stage and set
+            <b>Stale after (days)</b>.</p>
+        <p style="font-size:15px">Questions or ideas: <b>abbasodolution@gmail.com</b></p>
     </div>
 </section>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="crm_stale_snooze_wizard_form" model="ir.ui.view">
+        <field name="name">crm.stale.snooze.wizard.form</field>
+        <field name="model">crm.stale.snooze.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Pause Stale Reminders">
+                <p class="text-muted">The Watchdog leaves these opportunities alone until the date below,
+                    for example while a customer's budget is on hold.</p>
+                <group>
+                    <field name="lead_ids" widget="many2many_tags" readonly="1"/>
+                    <field name="period" widget="radio" options="{'horizontal': true}"/>
+                    <field name="snooze_until" readonly="period != 'custom'" force_save="1"/>
+                    <field name="reason" placeholder="e.g. Customer budget opens in January"/>
+                </group>
+                <footer>
+                    <button name="action_snooze" type="object" string="Pause Reminders" class="btn-primary"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

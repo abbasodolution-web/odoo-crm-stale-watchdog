@@ -1,24 +1,31 @@
-# Stale Opportunity Watchdog — Odoo 17 CRM
+# Stale Opportunity Watchdog — Odoo 18 CRM (v2)
 
 ![Stale Opportunity Watchdog](crm_stale_watchdog/static/description/banner.png)
 
-Never let a deal go quiet. Every day this module flags open CRM opportunities that
-haven't been updated for a number of days you choose, and gives the assigned
-salesperson a **Stale Opportunity Follow-up** activity.
+Find the deals that went quiet, before they are lost. Every day the Watchdog checks open
+opportunities for **real activity** (a note, an email, a completed activity or a stage change).
+When a deal has had none for too long, it is flagged in the pipeline and its salesperson gets a
+follow-up reminder. If nobody acts, the sales team leader hears about it.
 
 ## Features
-- Configurable inactivity threshold (Settings › CRM, default 30 days)
-- Daily scheduled action flags idle opportunities
-- Follow-up activity for the salesperson, never duplicated while one is open
-- Flag clears automatically when the opportunity is updated, won or lost
-- "Stale Opportunities" filter and "Stale" group-by in the Pipeline
-- Depends only on `crm` and `mail`; covered by automated tests
+- Real activity, not "last modified": automatic updates never hide a quiet deal
+- A limit per stage (e.g. 7 days in Proposition, 30 in New), with a company default
+- "Stale · 12d" badge on pipeline cards, a Days Inactive column and a banner on the form
+- Clears itself the moment someone logs a note, sends an email, completes an activity or moves the stage
+- Pause the reminders on a deal until a date, with the reason in the chatter (also for several deals at once)
+- Escalation: when the reminder stays overdue, the team leader gets an activity too
+- No salesperson? The team leader gets the reminder
+- Ignore opportunities with chosen tags
+- "Stale Opportunities" report: revenue at risk per salesperson and stage
+- Settings per company; depends only on `crm` and `mail`; 15 automated tests
 
 ## Install
 Copy `crm_stale_watchdog` into your addons path, update the Apps list, and install
-**Stale Opportunity Watchdog**.
+**Stale Opportunity Watchdog**. Settings: CRM › Configuration › Settings › Stale Opportunity Watchdog.
+
+The Odoo 17 version is on the [`17.0` branch](../../tree/17.0).
 
 ## Author
-**ABBAS** — custom Odoo development (Odoo 17 & 19). Support: abbasodolution@gmail.com
+**ABBAS** — custom Odoo development (Odoo 17, 18, 19 & 20). Support: abbasodolution@gmail.com
 
 License: LGPL-3

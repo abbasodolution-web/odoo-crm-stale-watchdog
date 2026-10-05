@@ -2,10 +2,18 @@
 <odoo noupdate="1">
     <record id="mail_act_stale_opportunity_reminder" model="mail.activity.type">
         <field name="name">Stale Opportunity Follow-up</field>
-        <field name="icon">fa-exclamation-triangle</field>
+        <field name="icon">fa-hourglass-end</field>
         <field name="res_model">crm.lead</field>
         <field name="category">default</field>
         <field name="delay_count">0</field>
         <field name="sequence">50</field>
+    </record>
+    <record id="mail_act_stale_opportunity_escalation" model="mail.activity.type">
+        <field name="name">Stale Opportunity Escalation</field>
+        <field name="icon">fa-exclamation-triangle</field>
+        <field name="res_model">crm.lead</field>
+        <field name="category">default</field>
+        <field name="delay_count">0</field>
+        <field name="sequence">51</field>
     </record>
 </odoo>

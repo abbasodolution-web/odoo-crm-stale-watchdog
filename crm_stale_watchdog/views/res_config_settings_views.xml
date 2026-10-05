@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="res_config_settings_view_form_inherit_stale_watchdog" model="ir.ui.view">
-        <field name="name">res.config.settings.view.form.inherit.crm.stale.watchdog</field>
+    <record id="res_config_settings_view_form_stale_watchdog" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.stale.watchdog</field>
         <field name="model">res.config.settings</field>
         <field name="inherit_id" ref="crm.res_config_settings_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//app[@name='crm']/block[1]" position="after">
                 <block title="Stale Opportunity Watchdog" name="crm_stale_watchdog_block">
-                    <setting id="crm_stale_watchdog_threshold"
-                             help="Opportunities untouched for this many days are flagged as stale and their salesperson gets a follow-up reminder">
-                        <field name="crm_stale_watchdog_threshold_days"/>
+                    <setting id="crm_stale_threshold" string="Stale after"
+                             help="Open opportunities with no note, email, completed activity or stage change for this many days get a follow-up reminder. Each stage can set its own number.">
+                        <div class="d-flex align-items-baseline gap-2"><field name="crm_stale_threshold_days" class="o_light_label" style="width: 5rem"/><span>days</span></div>
+                    </setting>
+                    <setting id="crm_stale_escalation" string="Escalate to team leader"
+                             help="When the reminder is still not done this many days after its due date, the sales team leader gets an activity too. 0 turns this off.">
+                        <div class="d-flex align-items-baseline gap-2"><field name="crm_stale_escalation_days" class="o_light_label" style="width: 5rem"/><span>days overdue</span></div>
+                    </setting>
+                    <setting id="crm_stale_ignore_tags" string="Ignore tags"
+                             help="Opportunities with any of these tags are never flagged as stale.">
+                        <field name="crm_stale_ignore_tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create': True}"/>
                     </setting>
                 </block>
             </xpath>
