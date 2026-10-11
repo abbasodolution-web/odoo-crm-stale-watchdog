@@ -22,11 +22,11 @@ Copy `crm_stale_watchdog` into your addons path, update the Apps list, and insta
 
 | Odoo | Price | Get it |
 |---|---|---|
-| 17 | Free (LGPL-3) | [Odoo Apps Store](https://apps.odoo.com/apps/modules/17.0/crm_stale_watchdog) |
-| 18 | Free (LGPL-3) | [Odoo Apps Store](https://apps.odoo.com/apps/modules/18.0/crm_stale_watchdog) |
-| 19 | $19 (one-time, OPL-1) | [Odoo Apps Store](https://apps.odoo.com/apps/modules/19.0/crm_stale_watchdog) |
+| 17 (v1) | Free (LGPL-3) | [Odoo Apps Store](https://apps.odoo.com/apps/modules/17.0/crm_stale_watchdog) |
+| 18 (v2) | Free (LGPL-3) | [Odoo Apps Store](https://apps.odoo.com/apps/modules/18.0/crm_stale_watchdog) |
+| 19 (v3) | $19 (one-time, OPL-1) | [Odoo Apps Store](https://apps.odoo.com/apps/modules/19.0/crm_stale_watchdog) |
 
 ## Author
-**ABBAS** — custom Odoo development (Odoo 17, 18 & 19). Support: abbasodolution@gmail.com
+**ABBAS** — custom Odoo development (Odoo 17, 18, 19 & 20). Support: abbasodolution@gmail.com
 
 License: LGPL-3
