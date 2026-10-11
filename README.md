@@ -25,7 +25,7 @@ Copy `crm_stale_watchdog` into your addons path, update the Apps list, and insta
 
 The Odoo 17 version is on the [`17.0` branch](../../tree/17.0).
 
-## Available for Odoo 17, 18, 19 and 20
+## Versions: Odoo 17, 18, 19 and 20
 
 | Odoo | Price | Get it |
 |---|---|---|
