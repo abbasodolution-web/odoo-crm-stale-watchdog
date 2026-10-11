@@ -18,7 +18,7 @@ salesperson a **Stale Opportunity Follow-up** activity.
 Copy `crm_stale_watchdog` into your addons path, update the Apps list, and install
 **Stale Opportunity Watchdog**.
 
-## Available for Odoo 17, 18, 19 and 20
+## Versions: Odoo 17, 18, 19 and 20
 
 | Odoo | Price | Get it |
 |---|---|---|
