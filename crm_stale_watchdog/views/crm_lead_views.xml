@@ -58,14 +58,14 @@
         <field name="arch" type="xml">
             <xpath expr="//div[hasclass('oe_title')]" position="before">
                 <field name="is_stale" invisible="1"/>
-                <div class="alert alert-warning d-flex align-items-center gap-2 mb-2" role="alert" invisible="not is_stale">
+                <div class="alert alert-warning d-flex flex-wrap align-items-center gap-2 mb-2" role="alert" invisible="not is_stale">
                     <i class="fa fa-hourglass-end"/>
-                    <span>No real activity for <b><field name="stale_days" class="d-inline"/> days</b>. Log a note, send an email or complete an activity, or pause the reminders if it is waiting on purpose.</span>
+                    <span style="flex:1 1 240px;min-width:0">No real activity for <b><field name="stale_days" class="d-inline"/> days</b>. Log a note, send an email or complete an activity, or pause the reminders if it is waiting on purpose.</span>
                     <button name="action_open_stale_snooze" type="object" string="Pause" class="btn btn-sm btn-secondary ms-auto"/>
                 </div>
-                <div class="alert alert-info d-flex align-items-center gap-2 mb-2" role="status" invisible="not stale_snoozed_until">
+                <div class="alert alert-info d-flex flex-wrap align-items-center gap-2 mb-2" role="status" invisible="not stale_snoozed_until">
                     <i class="fa fa-bell-slash"/>
-                    <span>Stale reminders paused until <field name="stale_snoozed_until" class="d-inline" readonly="1"/>.</span>
+                    <span style="flex:1 1 240px;min-width:0">Stale reminders paused until <field name="stale_snoozed_until" class="d-inline" readonly="1"/>.</span>
                     <button name="action_stale_unsnooze" type="object" string="Resume" class="btn btn-sm btn-link ms-auto"/>
                 </div>
             </xpath>

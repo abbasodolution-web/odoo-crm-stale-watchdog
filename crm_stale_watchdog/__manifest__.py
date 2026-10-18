@@ -1,6 +1,6 @@
 {
     'name': 'Stale Opportunity Watchdog',
-    'version': '18.0.2.0.0',
+    'version': '18.0.2.0.1',
     'category': 'Sales/CRM',
     'summary': 'Find CRM opportunities that went quiet: reminders, per-stage limits, '
                'pause, escalation and a revenue-at-risk report',
